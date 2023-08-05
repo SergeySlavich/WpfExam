@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfExam"
         mc:Ignorable="d"
-        Title="Список компаний и их сотрудников" Height="400" Width="800">
-    
+        Title="Список компаний и их сотрудников" Height="300" Width="1200">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,26 +16,35 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Name="nameCompany" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" Text="Введите название компании"></TextBox>
-        <TextBox Name="nameEmployee" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="5" Text="Введите имя сотрудника"></TextBox>
-        <ListView Name="Brend" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Margin="5">
-            <ListViewItem Content="Company_1"></ListViewItem>
-            <ListViewItem Content="Company_2"></ListViewItem>
-            <ListViewItem Content="Company_3"></ListViewItem>
-            <ListViewItem Content="Company_4"></ListViewItem>
-        </ListView>
-        <ListView Name="Employee" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  Margin="5">
-            <ListViewItem Content="Human_1"></ListViewItem>
-            <ListViewItem Content="Human_2"></ListViewItem>
-            <ListViewItem Content="Human_3"></ListViewItem>
-            <ListViewItem Content="Human_4"></ListViewItem>
-        </ListView>
-        <Button Name="addCompany" Content="Add company" Grid.Row="2" Grid.Column="0" Margin="5" Click="Button_Click"></Button>
-        <Button Name="deleteCompany"  Content="Delete company" Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
+
+        <TextBox Name="nameCompany" Text="Введите название компании"
+                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+        <TextBox Name="nameEmployee" Text="Введите имя сотрудника"
+                 Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="5"/>
+
+        <ListBox Name="companyList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Brend}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <ListBox Name="employeeList" ItemsSource="{Binding Employees}" DataContext="{Binding ElementName=companyList, Path=SelectedItem}"
+                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Name="addCompany" Content="Add company" Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
+        <Button Name="deleteCompany" Content="Delete company" Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
         <Button Name="addEmployee" Content="Add employee" Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"></Button>
-        <Button Name="deleteEmployee"  Content="Delete employee from list" Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
+        <Button Name="deleteEmployee" Content="Delete employee from list" Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
     </Grid>
 </Window>

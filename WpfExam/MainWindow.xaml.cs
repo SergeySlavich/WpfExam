@@ -20,52 +20,54 @@ namespace WpfExam
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Company> company = new List<Company>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            company.Add(new Company() { Brend = "Test_1", Employees = new List<Human> { new Human {
+                Name = "Ivan Ivanov", Phone = "+7-999-999-9999", Address = "Lenina st.", Post = "Director" }}});
+
+            company.Add(new Company { Brend = "Test_2", Employees = new List<Human> { new Human {
+                Name = "Петр Петров", Phone = "+7-999-999-9988", Address = "ул. Пушкина", Post = "Директор" },
+                new Human { Name = "Сидор Сидоров", Phone = "+7-999-999-9977", Address = "ул. Достоевского", Post = "Главный инженер"}}});
+            
+            companyList.ItemsSource = company;
         }
 
         class Human
         {
-            string name;
-            string phone;
-            string address;
-            string post;
+            public string Name { get; set; }
+            public string Phone { get; set; }
+            public string Address { get; set; }
+            public string Post { get; set; }
         }
 
         class Company
         {
-            string brend;
-            List<Human> listEmployee;
-        }
-
-        List<Company> listCompany;
-        List<Human> listEmployee;
-
-        
-        private void deleteCompany_Click(object sender, RoutedEventArgs e)
-        {
-            Brend.Items.RemoveAt(Brend.Items.IndexOf(Brend.SelectedItem));
-        }
-
-        private void addEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            Employee.Items.Add(nameEmployee.Text);
+            public string Brend { get; set; }
+            public List<Human> Employees { get; set; }
         }
 
         private void deleteEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Employee.Items.RemoveAt(Employee.Items.IndexOf(Employee.SelectedItem));
+            employeeList.Items.Remove(employeeList.SelectedItem);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void addEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Brend.Items.Add(nameCompany.Text);
+            employeeList.Items.Add(nameEmployee);
         }
 
-        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        private void deleteCompany_Click(object sender, RoutedEventArgs e)
         {
-            Employee.ItemsSource = Brend.Items;
+            companyList.Items.Remove(companyList.SelectedItem);
+        }
+
+        private void addCompany_Click(object sender, RoutedEventArgs e)
+        {
+            companyList.Items.Add($"{companyList.SelectedItem}");
         }
     }
 }
