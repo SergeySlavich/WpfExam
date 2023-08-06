@@ -28,7 +28,7 @@
         <ListBox Name="companyList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Brend}"/>
+                    <TextBlock Text="{Binding Brend, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,20 +21,21 @@ namespace WpfExam
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Company> company = new List<Company>();
+        ObservableCollection<Company> company = new ObservableCollection<Company>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            company.Add(new Company() { Brend = "Test_1", Employees = new List<Human> { new Human {
+            company.Add(new Company() { Brend = "Test_1", Employees = new ObservableCollection<Human> { new Human {
                 Name = "Ivan Ivanov", Phone = "+7-999-999-9999", Address = "Lenina st.", Post = "Director" }}});
 
-            company.Add(new Company { Brend = "Test_2", Employees = new List<Human> { new Human {
+            company.Add(new Company { Brend = "Test_2", Employees = new ObservableCollection<Human> { new Human {
                 Name = "Петр Петров", Phone = "+7-999-999-9988", Address = "ул. Пушкина", Post = "Директор" },
                 new Human { Name = "Сидор Сидоров", Phone = "+7-999-999-9977", Address = "ул. Достоевского", Post = "Главный инженер"}}});
             
             companyList.ItemsSource = company;
+
         }
 
         class Human
@@ -47,12 +49,17 @@ namespace WpfExam
         class Company
         {
             public string Brend { get; set; }
-            public List<Human> Employees { get; set; }
+            public ObservableCollection<Human> Employees { get; set; }
+
+            public string ToString()
+            {
+                return Brend;
+            }
         }
 
         private void deleteEmployee_Click(object sender, RoutedEventArgs e)
         {
-            employeeList.Items.Remove(employeeList.SelectedItem);
+            employeeList.Items.RemoveAt(employeeList.Items.IndexOf(employeeList.SelectedItem));
         }
 
         private void addEmployee_Click(object sender, RoutedEventArgs e)
@@ -62,12 +69,34 @@ namespace WpfExam
 
         private void deleteCompany_Click(object sender, RoutedEventArgs e)
         {
-            companyList.Items.Remove(companyList.SelectedItem);
+            company.Remove((Company)companyList.SelectedItem);
         }
 
         private void addCompany_Click(object sender, RoutedEventArgs e)
         {
-            companyList.Items.Add($"{companyList.SelectedItem}");
+            bool check = false;
+            foreach (var item in company)
+            {
+                if (nameCompany.Text == item.ToString())
+                {
+                    check = true;
+                }
+            }
+
+            if (nameCompany.Text == "Введите название компании")
+            {
+                check = true;
+            }
+
+            if (check)
+            {
+                MessageBox.Show("Пожалуйста, введите название компании.");
+            }
+            else
+            {
+                company.Add(new Company { Brend = nameCompany.Text, Employees = new ObservableCollection<Human>() });
+            }
         }
+
     }
 }
