@@ -21,10 +21,14 @@
         </Grid.RowDefinitions>
 
         <TextBox Name="nameCompany" Text="Введите название компании"
-                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
-        <TextBox Name="nameEmployee" Text="Введите имя сотрудника"
-                 Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="5"/>
-
+                 Grid.Row="0" Grid.Column="0" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Column="1" Grid.ColumnSpan="3">
+            <TextBox Name="nameEmployee" Text="Введите имя сотрудника"/>
+            <TextBox Name="phoneEmployee" Text="Введите номер телефона сотрудника"/>
+            <TextBox Name="addressEmployee" Text="Введите адрес сотрудника"/>
+            <TextBox Name="postEmployee" Text="Введите должность сотрудника"/>
+        </StackPanel>
+        
         <ListBox Name="companyList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -33,14 +37,22 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Name="employeeList" ItemsSource="{Binding Employees}" DataContext="{Binding ElementName=companyList, Path=SelectedItem}"
+        <ListView Name="employeeList" ItemsSource="{Binding Employees}" DataContext="{Binding ElementName=companyList, Path=SelectedItem}"
                  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
-            <ListBox.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}"/>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                        <TextBlock Text=": "/>
+                        <TextBlock Text="{Binding Path=Phone}"/>
+                        <TextBlock Text=" адрес: "/>
+                        <TextBlock Text="{Binding Path=Address}"/>
+                        <TextBlock Text=" Должность: "/>
+                        <TextBlock Text="{Binding Path=Post}"/>
+                    </WrapPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Button Name="addCompany" Content="Add company" Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
         <Button Name="deleteCompany" Content="Delete company" Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
