@@ -59,7 +59,7 @@ namespace WpfExam
 
         private void deleteEmployee_Click(object sender, RoutedEventArgs e)
         {
-            employeeList.Items.RemoveAt(employeeList.Items.IndexOf(employeeList.SelectedItem));
+            MessageBox.Show(employeeList.SelectedItem.ToString());
         }
 
         private void addEmployee_Click(object sender, RoutedEventArgs e)
