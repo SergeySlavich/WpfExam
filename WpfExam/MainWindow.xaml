@@ -56,11 +56,11 @@
 
         <Button Name="addCompany" Content="Add company"
                 Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
-        <Button Name="deleteCompany" Content="Delete company"
+        <Button Name="deleteCompany" Content="Delete company" IsEnabled="{Binding ElementName=companyList, Path=SelectedItems.Count}"
                 Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
-        <Button Name="addEmployee" Content="Add employee" IsEnabled="{Binding companyList.IsSelectedItem}"
+        <Button Name="addEmployee" Content="Add employee"
                 Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"></Button>
-        <Button Name="deleteEmployee" Content="Delete employee from list"
+        <Button Name="deleteEmployee" Content="Delete employee from list" IsEnabled="{Binding ElementName=employeeList, Path=SelectedItems.Count}"
                 Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
     </Grid>
 </Window>

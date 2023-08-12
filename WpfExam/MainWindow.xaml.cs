@@ -64,6 +64,7 @@ namespace WpfExam
             selectCompany = companyList.SelectedItem as Company;
             selectCompany.Employees.Remove((Human) employeeList.SelectedItem);
             companyList.SelectedItem = selectCompany;
+            MessageBox.Show("Сотрудник удален из списка сотрудников компании.");
         }
 
         private void addEmployee_Click(object sender, RoutedEventArgs e)
@@ -84,12 +85,14 @@ namespace WpfExam
                     Post = postEmployee.Text == "Введите должность сотрудника" ? "Данные остутствуют" : postEmployee.Text,
                 });
                 companyList.SelectedItem = selectCompany;
+                MessageBox.Show("Сотрудник добавлен в список сотрудников компании.");
             }
         }
 
         private void deleteCompany_Click(object sender, RoutedEventArgs e)
         {
             company.Remove((Company)companyList.SelectedItem);
+            MessageBox.Show("Компания удалена из списка компаний.");
         }
 
         private void addCompany_Click(object sender, RoutedEventArgs e)
@@ -115,6 +118,7 @@ namespace WpfExam
             else
             {
                 company.Add(new Company { Brend = nameCompany.Text, Employees = new ObservableCollection<Human>() });
+                MessageBox.Show("Компания добавлена в список компаний.");
             }
         }
     }
