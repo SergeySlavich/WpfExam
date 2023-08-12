@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace WpfExam
                 new Human { Name = "Сидор Сидоров", Phone = "+7-999-999-9977", Address = "ул. Достоевского", Post = "Главный инженер"}}});
             
             companyList.ItemsSource = company;
-
+            
         }
 
         class Human
@@ -59,12 +60,31 @@ namespace WpfExam
 
         private void deleteEmployee_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(employeeList.SelectedItem.ToString());
+            Company selectCompany = new Company();
+            selectCompany = companyList.SelectedItem as Company;
+            selectCompany.Employees.Remove((Human) employeeList.SelectedItem);
+            companyList.SelectedItem = selectCompany;
         }
 
         private void addEmployee_Click(object sender, RoutedEventArgs e)
         {
-            employeeList.Items.Add(nameEmployee);
+            if (nameEmployee.Text == "Введите имя сотрудника")
+            {
+                MessageBox.Show("Сначала введите имя сотрудника.");
+            }
+            else
+            {
+                Company selectCompany = new Company();
+                selectCompany = companyList.SelectedItem as Company;
+                selectCompany.Employees.Add(new Human
+                {
+                    Name = nameEmployee.Text,
+                    Phone = phoneEmployee.Text == "Введите номер телефона сотрудника" ? "Данные отсутствуют" : phoneEmployee.Text,
+                    Address = addressEmployee.Text == "Введите адрес сотрудника" ? "Данные осутствуют" : addressEmployee.Text,
+                    Post = postEmployee.Text == "Введите должность сотрудника" ? "Данные остутствуют" : postEmployee.Text,
+                });
+                companyList.SelectedItem = selectCompany;
+            }
         }
 
         private void deleteCompany_Click(object sender, RoutedEventArgs e)
@@ -97,6 +117,5 @@ namespace WpfExam
                 company.Add(new Company { Brend = nameCompany.Text, Employees = new ObservableCollection<Human>() });
             }
         }
-
     }
 }

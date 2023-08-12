@@ -41,7 +41,7 @@
                  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <WrapPanel>
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Name}"/>
                         <TextBlock Text=": "/>
                         <TextBlock Text="{Binding Path=Phone}"/>
@@ -49,14 +49,18 @@
                         <TextBlock Text="{Binding Path=Address}"/>
                         <TextBlock Text=" Должность: "/>
                         <TextBlock Text="{Binding Path=Post}"/>
-                    </WrapPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Name="addCompany" Content="Add company" Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
-        <Button Name="deleteCompany" Content="Delete company" Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
-        <Button Name="addEmployee" Content="Add employee" Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"></Button>
-        <Button Name="deleteEmployee" Content="Delete employee from list" Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
+        <Button Name="addCompany" Content="Add company"
+                Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
+        <Button Name="deleteCompany" Content="Delete company"
+                Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
+        <Button Name="addEmployee" Content="Add employee" IsEnabled="{Binding companyList.IsSelectedItem}"
+                Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"></Button>
+        <Button Name="deleteEmployee" Content="Delete employee from list"
+                Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
     </Grid>
 </Window>
