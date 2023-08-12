@@ -54,13 +54,16 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Name="addCompany" Content="Add company"
-                Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"></Button>
+        <Button Name="addCompany" Content="Add company" IsEnabled="{Binding ElementName=nameCompany, Path=Text.Length}"
+                Grid.Row="2" Grid.Column="0" Margin="5" Click="addCompany_Click"/>
+        
         <Button Name="deleteCompany" Content="Delete company" IsEnabled="{Binding ElementName=companyList, Path=SelectedItems.Count}"
-                Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"></Button>
-        <Button Name="addEmployee" Content="Add employee"
-                Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"></Button>
+                Grid.Row="2" Grid.Column="1" Margin="5" Click="deleteCompany_Click"/>
+
+        <Button Name="addEmployee" Content="Add employee" IsEnabled="{Binding ElementName=companyList, Path=SelectedItems.Count}"
+                Grid.Row="2" Grid.Column="2" Margin="5" Click="addEmployee_Click"/>
+        
         <Button Name="deleteEmployee" Content="Delete employee from list" IsEnabled="{Binding ElementName=employeeList, Path=SelectedItems.Count}"
-                Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"></Button>
+                Grid.Row="2" Grid.Column="3" Margin="5" Click="deleteEmployee_Click"/>
     </Grid>
 </Window>

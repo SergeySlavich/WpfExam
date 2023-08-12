@@ -80,9 +80,9 @@ namespace WpfExam
                 selectCompany.Employees.Add(new Human
                 {
                     Name = nameEmployee.Text,
-                    Phone = phoneEmployee.Text == "Введите номер телефона сотрудника" ? "Данные отсутствуют" : phoneEmployee.Text,
+                    Phone = phoneEmployee.Text == "Введите номер телефона сотрудника" ? "Нет телефона" : phoneEmployee.Text,
                     Address = addressEmployee.Text == "Введите адрес сотрудника" ? "Данные осутствуют" : addressEmployee.Text,
-                    Post = postEmployee.Text == "Введите должность сотрудника" ? "Данные остутствуют" : postEmployee.Text,
+                    Post = postEmployee.Text == "Введите должность сотрудника" ? "Нет данных" : postEmployee.Text,
                 });
                 companyList.SelectedItem = selectCompany;
                 MessageBox.Show("Сотрудник добавлен в список сотрудников компании.");
